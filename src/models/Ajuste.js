@@ -2,12 +2,7 @@ const BaseModel = require('./BaseModel');
 
 class Ajuste extends BaseModel {
     static async findAll() {
-        const rows = await this.query('SELECT clave, valor FROM ajustes_inicio');
-        // Convert array of [{clave, valor}] to single object {clave: valor}
-        return rows.reduce((acc, current) => {
-            acc[current.clave] = current.valor;
-            return acc;
-        }, {});
+        return await this.query('SELECT clave, valor FROM ajustes_inicio');
     }
 
     static async update(clave, valor) {

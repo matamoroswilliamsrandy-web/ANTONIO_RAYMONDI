@@ -16,7 +16,7 @@ class Evento extends BaseModel {
 
     static async create(data) {
         const { titulo, descripcion, fecha_evento, hora_evento, lugar, destacado, imagen, imagen2, imagen3 } = data;
-        const [result] = await this.db.query(
+        const result = await this.execute(
             'INSERT INTO eventos (titulo, descripcion, fecha_evento, hora_evento, lugar, destacado, imagen, imagen2, imagen3) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
             [titulo, descripcion, fecha_evento, hora_evento, lugar, destacado || 0, imagen, imagen2, imagen3]
         );
@@ -40,7 +40,7 @@ class Evento extends BaseModel {
         if (fields.length === 0) return;
 
         values.push(id);
-        const [result] = await this.db.query(`UPDATE eventos SET ${fields.join(', ')} WHERE id = ?`, values);
+        const result = await this.execute(`UPDATE eventos SET ${fields.join(', ')} WHERE id = ?`, values);
         return result.affectedRows;
     }
 

@@ -44,8 +44,6 @@ class Noticia extends BaseModel {
 
     static async update(id, data) {
         const { titulo, contenido, imagen, imagen2, imagen3, destacada } = data;
-
-        // Creamos la query dinámicamente según qué imágenes se envíen
         let sql = 'UPDATE noticias SET titulo = ?, contenido = ?, destacada = ?';
         let params = [titulo, contenido, destacada ? 1 : 0];
 

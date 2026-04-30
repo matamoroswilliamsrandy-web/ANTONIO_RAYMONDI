@@ -1481,114 +1481,215 @@
     }
 }
 
-/* --- SOCIAL FEED SECTION --- */
-.social-section {
-    padding: 100px 0;
-    background: #f8fafc;
+/* --- MODERNIZED SOCIAL SECTION --- */
+.social-section-modern {
+    padding: 120px 0;
+    background: #ffffff;
     position: relative;
     overflow: hidden;
 }
 
-.social-content {
+.social-hub-card {
+    position: relative;
+    width: 100%;
+    min-height: 500px;
+    border-radius: 40px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    padding: 60px;
+    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.1);
+    background: #000;
+}
+
+.social-hub-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    transition: transform 10s linear;
+    z-index: 1;
+}
+
+.social-hub-card:hover .social-hub-bg {
+    transform: scale(1.1);
+}
+
+.social-hub-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, 
+        rgba(0, 0, 0, 0.95) 0%, 
+        rgba(0, 0, 0, 0.7) 50%, 
+        rgba(227, 27, 35, 0.3) 100%);
+    z-index: 2;
+}
+
+.social-hub-content {
+    position: relative;
+    z-index: 10;
+    width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 60px;
+    gap: 80px;
     align-items: center;
 }
 
-.fb-feed-wrapper {
-    background: white;
-    padding: 20px;
-    border-radius: 30px;
-    /* Multilayer Frame Effect */
-    border: 1px solid rgba(0, 0, 0, 0.08);
-    box-shadow:
-        0 10px 30px rgba(0, 0, 0, 0.05),
-        0 30px 60px rgba(0, 0, 0, 0.1),
-        inset 0 0 0 10px #f8fafc,
-        /* Inner "mat" border */
-        inset 0 0 0 11px rgba(0, 0, 0, 0.05);
-    /* Thin inner line */
-    display: flex;
-    justify-content: center;
-    overflow: hidden;
-    min-height: 640px;
-    position: relative;
-    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.fb-feed-wrapper::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: 30px;
-    padding: 2px;
-    /* Border thickness */
-    background: linear-gradient(135deg, #E31B23, transparent, #E31B23);
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    opacity: 0.3;
-}
-
-.fb-feed-wrapper:hover {
-    transform: translateY(-5px) scale(1.01);
-    box-shadow:
-        0 15px 40px rgba(0, 0, 0, 0.08),
-        0 40px 80px rgba(0, 0, 0, 0.15),
-        inset 0 0 0 10px #f1f5f9;
-}
-
-.social-info-card {
-    background: white;
-    padding: 50px;
-    border-radius: 30px;
-    box-shadow: 0 20px 40px rgba(227, 27, 35, 0.05);
-    border-left: 5px solid #E31B23;
-    transition: all 0.4s ease;
-}
-
-.social-info-card:hover {
-    transform: translateX(10px);
-    box-shadow: 0 30px 60px rgba(227, 27, 35, 0.1);
-}
-
-.social-info-card i.fa-facebook-square {
-    font-size: 4rem;
-    color: #1877F2;
+.social-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(227, 27, 35, 0.2);
+    color: #ff4d4d;
+    padding: 8px 20px;
+    border-radius: 50px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    font-size: 0.75rem;
     margin-bottom: 25px;
+    border: 1px solid rgba(227, 27, 35, 0.3);
 }
 
-.social-info-card h3 {
-    font-size: 2.2rem;
-    font-weight: 850;
+.social-hub-title {
+    font-size: 3.5rem;
+    font-weight: 950;
+    color: #ffffff;
+    line-height: 1.1;
+    margin-bottom: 25px;
+    letter-spacing: -2px;
+}
+
+.social-hub-text {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.6;
+    max-width: 500px;
+}
+
+.social-hub-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    align-items: flex-start;
+}
+
+.btn-facebook-modern {
+    display: inline-flex;
+    align-items: center;
+    gap: 20px;
+    background: #ffffff;
     color: #1a202c;
-    margin-bottom: 20px;
-    letter-spacing: -1px;
+    padding: 22px 45px;
+    border-radius: 20px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
-.social-info-card p {
-    font-size: 1.15rem;
-    color: #4a5568;
-    line-height: 1.7;
-    margin-bottom: 35px;
+.btn-facebook-modern:hover {
+    transform: translateY(-10px) scale(1.02);
+    background: #E31B23;
+    color: #ffffff;
+    box-shadow: 0 30px 60px rgba(227, 27, 35, 0.4);
 }
 
-@media (max-width: 992px) {
-    .social-content {
+.btn-facebook-modern i {
+    font-size: 1.4rem;
+}
+
+.social-hub-stats {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+}
+
+.hub-stat {
+    display: flex;
+    flex-direction: column;
+}
+
+.hub-stat-num {
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: #ffffff;
+    line-height: 1;
+}
+
+.hub-stat-lbl {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 700;
+}
+
+.hub-divider {
+    width: 1px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* Decorative Elements */
+.hub-decor-1 {
+    position: absolute;
+    top: -100px;
+    right: -100px;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(227, 27, 35, 0.15) 0%, transparent 70%);
+    z-index: 3;
+}
+
+.hub-decor-2 {
+    position: absolute;
+    bottom: -50px;
+    left: -50px;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(227, 27, 35, 0.1) 0%, transparent 70%);
+    z-index: 3;
+}
+
+@media (max-width: 1024px) {
+    .social-hub-content {
         grid-template-columns: 1fr;
-        gap: 40px;
-    }
-
-    .social-info-card {
-        padding: 40px 30px;
+        gap: 50px;
         text-align: center;
-        border-left: none;
-        border-top: 5px solid #E31B23;
     }
 
-    .fb-feed-wrapper {
+    .social-hub-actions {
+        align-items: center;
+    }
+
+    .social-hub-title {
+        font-size: 2.8rem;
+    }
+
+    .social-hub-text {
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .social-hub-card {
+        padding: 40px 30px;
         min-height: auto;
+        border-radius: 30px;
+    }
+
+    .social-hub-title {
+        font-size: 2.2rem;
+    }
+
+    .btn-facebook-modern {
+        width: 100%;
+        justify-content: center;
+        padding: 18px 30px;
+    }
+
+    .social-hub-stats {
+        gap: 30px;
     }
 }
