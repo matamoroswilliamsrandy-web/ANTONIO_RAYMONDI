@@ -92,18 +92,22 @@
     }
 }
 
-/* Responsive adjustment */
-@media (max-width: 768px) {
+/* Responsive: subir el botón por encima del bottom nav */
+@media (max-width: 980px) {
     .whatsapp-float {
-        bottom: 20px;
-        right: 20px;
-        width: 55px;
-        height: 55px;
+        bottom: 90px; /* 72px del bottom nav + 18px de margen */
+        right: 16px;
+        width: 52px;
+        height: 52px;
         font-size: 24px;
+        box-shadow: 0 6px 18px rgba(37, 211, 102, 0.45);
     }
 
     .whatsapp-float::after {
-        display: none;
-        /* Hide tooltip on mobile to avoid clutter */
+        display: none; /* Ocultar tooltip en móvil */
     }
-}
+
+    .whatsapp-pulse {
+        display: none; /* Menos ruido visual en móvil */
+    }
+}

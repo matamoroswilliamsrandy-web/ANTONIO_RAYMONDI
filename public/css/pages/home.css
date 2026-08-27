@@ -878,11 +878,12 @@
 }
 
 .section-title {
-    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-size: clamp(2rem, 5vw, 3.5rem);
     font-weight: 950;
     color: var(--secondary-color);
     margin: 0;
-    letter-spacing: -1.5px;
+    letter-spacing: -1px;
+    line-height: 1.2;
 }
 
 .title-underline {
@@ -895,8 +896,8 @@
 
 .news-grid-premium {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 40px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
 }
 
 .news-card-premium {
@@ -1137,20 +1138,21 @@
 .btn-modern {
     display: inline-flex;
     align-items: center;
-    gap: 15px;
-    padding: 16px 35px;
+    justify-content: center;
+    gap: 12px;
+    padding: 14px 28px;
     background: linear-gradient(135deg, #E31B23 0%, #b71c1c 100%);
     color: #ffffff !important;
     text-decoration: none !important;
     font-weight: 700;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     text-transform: uppercase;
     letter-spacing: 1px;
     border-radius: 12px;
     position: relative;
     overflow: hidden;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    box-shadow: 0 10px 30px rgba(183, 28, 28, 0.3);
+    box-shadow: 0 8px 25px rgba(183, 28, 28, 0.3);
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -1196,16 +1198,36 @@
 
 /* --- RESPONSIVE ADJUSTMENTS --- */
 @media (max-width: 768px) {
+    .news-grid-premium {
+        gap: 20px;
+    }
+
     .news-card-premium {
-        height: 380px;
+        height: 360px;
     }
 
     .news-card-premium .news-card-title {
-        font-size: 1.4rem;
+        font-size: 1.35rem;
+        margin-bottom: 10px;
     }
 
     .news-card-content {
-        padding: 20px 24px;
+        padding: 20px;
+    }
+
+    .news-cta-wrap {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+        padding: 20px 0 0;
+    }
+
+    .btn-modern {
+        width: 100%;
+        padding: 12px 20px;
+        font-size: 0.85rem;
+        border-radius: 10px;
+        box-shadow: 0 6px 20px rgba(183, 28, 28, 0.25);
     }
 }
 

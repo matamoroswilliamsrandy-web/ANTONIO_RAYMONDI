@@ -3,32 +3,81 @@ document.addEventListener('DOMContentLoaded', () => {
     /* --- Mobile Menu Toggle --- */
     const menuToggle = document.getElementById('mobile-menu');
     const navWrapper = document.querySelector('.nav-wrapper');
+    const navOverlay = document.getElementById('nav-overlay');
     const header = document.getElementById('main-header');
+    const bottomNavMore = document.getElementById('bn-menu');
+    const waBtn = document.querySelector('.whatsapp-float');
 
-    if (menuToggle && navWrapper) {
-        menuToggle.addEventListener('click', () => {
-            navWrapper.classList.toggle('active');
-            const icon = menuToggle.querySelector('i');
+    function openDrawer() {
+        if (!navWrapper) return;
+        navWrapper.classList.add('active');
+        if (navOverlay) navOverlay.classList.add('active');
+        if (bottomNavMore) bottomNavMore.classList.add('active');
+        if (waBtn) waBtn.style.display = 'none';
+        const icon = menuToggle ? menuToggle.querySelector('i') : null;
+        if (icon) icon.classList.replace('fa-bars', 'fa-times');
+        document.body.style.overflow = 'hidden';
+    }
 
-            if (navWrapper.classList.contains('active')) {
-                icon.classList.replace('fa-bars', 'fa-times');
-                document.body.style.overflow = 'hidden';
+    function closeDrawer() {
+        if (!navWrapper) return;
+        navWrapper.classList.remove('active');
+        if (navOverlay) navOverlay.classList.remove('active');
+        if (bottomNavMore) bottomNavMore.classList.remove('active');
+        if (waBtn) waBtn.style.display = '';
+        const icon = menuToggle ? menuToggle.querySelector('i') : null;
+        if (icon) icon.classList.replace('fa-times', 'fa-bars');
+        document.body.style.overflow = '';
+    }
+
+    // Toggle drawer al presionar el botón hamburger (desktop/viejo móvil)
+    if (menuToggle) {
+        menuToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (navWrapper && navWrapper.classList.contains('active')) {
+                closeDrawer();
             } else {
-                icon.classList.replace('fa-times', 'fa-bars');
-                document.body.style.overflow = '';
+                openDrawer();
             }
         });
+    }
 
-        // Close menu when clicking links
-        navWrapper.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                navWrapper.classList.remove('active');
-                const icon = menuToggle.querySelector('i');
-                if (icon) icon.classList.replace('fa-times', 'fa-bars');
-                document.body.style.overflow = '';
-            });
+    // Toggle drawer al presionar el botón del bottom nav (nuevo móvil)
+    if (bottomNavMore) {
+        bottomNavMore.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            if (navWrapper && navWrapper.classList.contains('active')) {
+                closeDrawer();
+            } else {
+                openDrawer();
+            }
         });
     }
+
+    // Cerrar drawer al tocar FUERA del drawer (en el overlay o en la página)
+    document.addEventListener('touchstart', (e) => {
+        if (navWrapper && navWrapper.classList.contains('active')) {
+            if (!navWrapper.contains(e.target) && (!menuToggle || !menuToggle.contains(e.target)) && (!bottomNavMore || !bottomNavMore.contains(e.target))) {
+                closeDrawer();
+            }
+        }
+    }, { passive: true });
+
+    document.addEventListener('click', (e) => {
+        if (navWrapper && navWrapper.classList.contains('active')) {
+            if (!navWrapper.contains(e.target) && (!menuToggle || !menuToggle.contains(e.target)) && (!bottomNavMore || !bottomNavMore.contains(e.target))) {
+                closeDrawer();
+            }
+        }
+    });
+
+    // Cerrar drawer con tecla Escape
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && navWrapper && navWrapper.classList.contains('active')) {
+            closeDrawer();
+        }
+    });
 
 
     /* --- Sticky Header Effect --- */

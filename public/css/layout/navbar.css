@@ -1,30 +1,35 @@
+/* =====================================================
+   NAVBAR - IE. Antonio Raymondi
+   Premium Mobile-First Version
+   ===================================================== */
+
+/* ---- Desktop Header ---- */
 #main-header {
-    background: rgba(255, 255, 255, 0.72) !important;
-    height: 75px;
+    background: rgba(255, 255, 255, 0.82);
+    height: 72px;
     position: fixed;
-    top: 2px;
-    /* Casi al borde superior */
+    top: 8px;
     left: 50%;
     transform: translateX(-50%);
-    width: 95%;
+    width: 94%;
     max-width: 1400px;
     z-index: 1000;
     transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
     display: flex;
     align-items: center;
     border-radius: 100px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    backdrop-filter: blur(15px) saturate(180%);
-    -webkit-backdrop-filter: blur(15px) saturate(180%);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.10), 0 1px 2px rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(20px) saturate(200%);
+    -webkit-backdrop-filter: blur(20px) saturate(200%);
 }
 
 #main-header.scrolled {
     top: 5px;
-    height: 65px;
-    width: 98%;
-    background: rgba(255, 255, 255, 0.85) !important;
-    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.1);
+    height: 62px;
+    width: 97%;
+    background: rgba(255, 255, 255, 0.92);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.13);
 }
 
 .nav-container {
@@ -33,39 +38,40 @@
     justify-content: space-between;
     height: 100%;
     width: 100%;
-    padding: 0 15px 0 25px;
+    padding: 0 15px 0 22px;
 }
 
+/* ---- Logo ---- */
 .logo {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 11px;
     text-decoration: none;
     z-index: 5;
     flex-shrink: 0;
 }
 
 .logo img {
-    height: 52px;
+    height: 50px;
     width: auto;
-    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.05));
+    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.08));
     transition: var(--transition);
 }
 
 #main-header.scrolled .logo img {
-    height: 44px;
+    height: 42px;
 }
 
 .logo-text {
     font-family: 'Poppins', sans-serif;
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     font-weight: 600;
     color: var(--secondary-color);
     line-height: 1;
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 6px;
+    gap: 5px;
     white-space: nowrap;
 }
 
@@ -74,12 +80,14 @@
     font-weight: 800;
 }
 
-/* Ocultar cabecera móvil en desktop */
+/* ---- Ocultar cabecera móvil en desktop ---- */
 .mobile-menu-header {
     display: none;
 }
 
-/* Navegación Desktop */
+/* =====================================================
+   DESKTOP NAV (>= 981px)
+   ===================================================== */
 @media (min-width: 981px) {
     .nav-wrapper {
         display: contents;
@@ -89,7 +97,7 @@
         flex: 1;
         display: flex;
         justify-content: center;
-        gap: 20px;
+        gap: 18px;
         margin: 0;
         padding: 0 20px;
         list-style: none;
@@ -101,6 +109,12 @@
         align-items: center;
         flex-shrink: 0;
     }
+
+    /* Ocultar elementos solo-móvil en desktop */
+    .mobile-bottom-nav,
+    .nav-overlay {
+        display: none !important;
+    }
 }
 
 .nav-links li {
@@ -111,18 +125,18 @@
 .nav-links a {
     font-weight: 500;
     color: var(--secondary-color);
-    font-size: 0.92rem;
+    font-size: 0.91rem;
     position: relative;
     padding: 8px 0;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 7px;
     transition: var(--transition);
 }
 
 .nav-links a i {
-    font-size: 1rem;
-    color: #666;
+    font-size: 0.95rem;
+    color: #888;
     transition: color 0.3s ease;
 }
 
@@ -131,7 +145,7 @@
     color: var(--primary-color);
 }
 
-/* Animación de Línea Inferior */
+/* Línea inferior animada */
 .nav-links a:not(.btn-login)::after {
     content: '';
     position: absolute;
@@ -154,111 +168,212 @@
     font-weight: 700;
 }
 
-/* Botón Menú Móvil - Rediseño Premium */
+/* ---- Botón Login ---- */
+.btn-login {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--primary-color);
+    color: white !important;
+    padding: 9px 20px;
+    border-radius: 50px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 14px rgba(211, 47, 47, 0.35);
+    text-decoration: none;
+}
+
+.btn-login:hover {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(211, 47, 47, 0.45);
+}
+
+/* ---- Toggle Button (hamburger) ---- */
 .menu-toggle {
     display: none;
     cursor: pointer;
-    font-size: 1.6rem;
+    font-size: 1.55rem;
     color: var(--secondary-color);
-    width: 48px;
-    height: 48px;
+    width: 46px;
+    height: 46px;
     background: transparent;
     border-radius: 50%;
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
     z-index: 10;
+    flex-shrink: 0;
 }
 
 .menu-toggle:hover {
-    background: rgba(0, 0, 0, 0.04);
+    background: rgba(0, 0, 0, 0.05);
     color: var(--primary-color);
 }
 
-/* Responsive */
+/* =====================================================
+   MOBILE (<= 980px)
+   ===================================================== */
 @media (max-width: 980px) {
+
+    /* Header SIEMPRE fijo en móvil */
     #main-header {
-        position: absolute;
-        top: 0;
-        border-radius: 0;
-        width: 100%;
-        left: 0;
-        transform: none;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        transform: none !important;
+        border-radius: 0 !important;
+        height: 62px;
+        border: none;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+        box-shadow: 0 2px 16px rgba(0, 0, 0, 0.10);
+        background: rgba(255, 255, 255, 0.97) !important;
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
     }
 
+    #main-header.scrolled {
+        top: 0 !important;
+        width: 100% !important;
+        height: 62px;
+    }
+
+    body {
+        padding-top: 62px;
+        padding-bottom: 72px;
+    }
+
+    /* Ocultar hamburger - la navegación está en el bottom nav */
     .menu-toggle {
-        display: flex;
+        display: none !important;
     }
 
+    /* Centrar el logo en el header móvil */
+    .nav-container {
+        justify-content: center;
+    }
+
+    .logo {
+        justify-content: center;
+    }
+
+    /* ---- Overlay oscuro - solo visual, no bloquea eventos ---- */
+    .nav-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.50);
+        z-index: 9998;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .nav-overlay.active {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: none;
+    }
+
+    /* ---- Side Drawer ---- */
     .nav-wrapper {
         position: fixed;
         top: 0;
-        right: -110%;
-        width: 300px;
-        height: 100vh;
+        right: -105%;
+        width: 288px;
+        height: 100dvh;
         background:
-            radial-gradient(ellipse 260px 300px at 30% 10%, rgba(192, 57, 43, 0.18) 0%, transparent 70%),
-            radial-gradient(ellipse 220px 250px at 85% 65%, rgba(67, 56, 202, 0.14) 0%, transparent 70%),
-            linear-gradient(160deg, #12172b 0%, #0d1117 60%, #110a0a 100%);
+            radial-gradient(ellipse 240px 280px at 20% 8%, rgba(211, 47, 47, 0.22) 0%, transparent 65%),
+            radial-gradient(ellipse 200px 230px at 90% 70%, rgba(67, 56, 202, 0.16) 0%, transparent 65%),
+            linear-gradient(155deg, #141929 0%, #0d1117 55%, #130909 100%);
         flex-direction: column;
         align-items: flex-start;
         padding: 0;
         gap: 0;
-        transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        box-shadow: -15px 0 50px rgba(0, 0, 0, 0.4);
+        transition: right 0.42s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: -20px 0 60px rgba(0, 0, 0, 0.45);
         z-index: 9999;
         overflow-y: auto;
         display: flex;
-        border-left: 1px solid rgba(255, 255, 255, 0.08);
+        border-left: 1px solid rgba(255, 255, 255, 0.06);
     }
 
-    /* Grid pattern texture */
-    .nav-wrapper::after {
+    /* Textura cuadrícula sutil */
+    .nav-wrapper::before {
         content: '';
         position: absolute;
         inset: 0;
         pointer-events: none;
         background-image:
-            linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-        background-size: 30px 30px;
+            linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+        background-size: 28px 28px;
         z-index: 0;
+    }
+
+    /* Barra de acento arriba */
+    .nav-wrapper::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, var(--primary-color), #ff6b6b, var(--primary-color));
+        background-size: 200% 100%;
+        animation: navGradientShift 3s ease infinite;
+        z-index: 1;
+        pointer-events: none;
+    }
+
+    @keyframes navGradientShift {
+        0%, 100% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
     }
 
     .nav-wrapper.active {
         right: 0;
     }
 
-    /* Mobile Branding Header */
+    /* ---- Cabecera del drawer ---- */
     .mobile-menu-header {
         width: 100%;
-        padding: 40px 25px 30px;
+        padding: 40px 22px 26px;
         display: flex;
         align-items: center;
-        gap: 15px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+        gap: 13px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         position: relative;
         z-index: 1;
+        flex-shrink: 0;
     }
 
     .mobile-menu-header img {
-        height: 50px;
-        filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.3));
+        height: 46px;
+        filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.35));
     }
 
     .mobile-menu-header .logo-text {
         color: white;
-        font-size: 1.25rem;
+        font-size: 1.15rem;
     }
 
+    .mobile-menu-header .logo-text span {
+        color: #ff8a80;
+    }
+
+    /* ---- Nav links en el drawer ---- */
     .nav-links {
         flex-direction: column;
         align-items: flex-start;
         width: 100%;
-        gap: 5px;
+        gap: 3px;
         display: flex;
         list-style: none;
-        padding: 20px 15px;
+        padding: 16px 12px 8px;
         position: relative;
         z-index: 1;
     }
@@ -270,69 +385,218 @@
     .nav-links a {
         display: flex;
         align-items: center;
-        gap: 15px;
-        padding: 14px 20px;
+        gap: 14px;
+        padding: 13px 16px;
         width: 100%;
-        color: rgba(255, 255, 255, 0.65);
-        font-size: 1rem;
+        color: rgba(255, 255, 255, 0.62);
+        font-size: 0.97rem;
         font-weight: 500;
         text-decoration: none;
-        border-radius: 12px;
-        transition: all 0.3s ease;
+        border-radius: 11px;
+        transition: all 0.28s ease;
         position: relative;
+        z-index: 2;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+        cursor: pointer;
     }
 
     .nav-links a i {
         width: 20px;
         text-align: center;
-        font-size: 1.1rem;
-        transition: transform 0.3s ease;
+        font-size: 1.05rem;
+        color: rgba(255, 255, 255, 0.38);
+        transition: all 0.28s ease;
+        flex-shrink: 0;
     }
 
-    .nav-links a:hover,
-    .nav-links a.active {
-        background: rgba(255, 255, 255, 0.08);
+    .nav-links a:hover {
+        background: rgba(255, 255, 255, 0.07);
         color: white;
     }
 
+    .nav-links a:hover i {
+        color: #ff8a80;
+        transform: scale(1.15);
+    }
+
     .nav-links a.active {
-        background: rgba(192, 57, 43, 0.15);
-        color: var(--primary-color);
+        background: rgba(211, 47, 47, 0.18);
+        color: #ff6b6b;
         font-weight: 700;
     }
 
+    .nav-links a.active i {
+        color: #ff6b6b;
+    }
+
+    /* Indicador barra izquierda activo */
     .nav-links a.active::before {
         content: '';
         position: absolute;
         left: 0;
         top: 50%;
         transform: translateY(-50%);
-        width: 4px;
-        height: 25px;
-        background: var(--primary-color);
-        border-radius: 0 4px 4px 0;
+        width: 3px;
+        height: 22px;
+        background: linear-gradient(to bottom, #ff5252, #ff1744);
+        border-radius: 0 3px 3px 0;
+        box-shadow: 0 0 8px rgba(255, 82, 82, 0.5);
     }
 
-    .nav-links a:hover i {
-        transform: scale(1.15);
-        color: var(--primary-color);
-    }
-
+    /* ---- Botón acción en drawer ---- */
     .nav-actions {
         width: 100%;
         display: flex;
-        padding: 0 15px 40px;
+        padding: 8px 12px 36px;
         position: relative;
         z-index: 1;
+        margin-top: auto;
     }
 
     .nav-actions .btn-login {
         width: 100%;
         justify-content: center;
-        padding: 16px;
-        font-size: 1rem;
-        background: var(--primary-color);
+        padding: 15px;
+        font-size: 0.97rem;
+        background: linear-gradient(135deg, var(--primary-color), #ff5252);
         color: white !important;
-        box-shadow: 0 8px 25px rgba(192, 57, 43, 0.3);
+        box-shadow: 0 8px 24px rgba(211, 47, 47, 0.38);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+}
+
+/* =====================================================
+   BOTTOM NAVIGATION BAR (solo móvil)
+   ===================================================== */
+.mobile-bottom-nav {
+    display: none;
+}
+
+@media (max-width: 980px) {
+    /* ---- Bottom Nav Bar ---- */
+    .mobile-bottom-nav {
+        display: flex;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 72px;
+        background: #ffffff;
+        border-top: 1.5px solid rgba(0, 0, 0, 0.09);
+        box-shadow: 0 -6px 24px rgba(0, 0, 0, 0.12);
+        z-index: 997;
+        align-items: center;
+        justify-content: space-around;
+        padding: 0 6px;
+        padding-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    .bottom-nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+        flex: 1;
+        min-height: 56px;
+        min-width: 44px;
+        padding: 6px 2px;
+        text-decoration: none;
+        color: #aaaaaa;
+        font-size: 0.62rem;
+        font-weight: 600;
+        font-family: 'Poppins', sans-serif;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+        transition: color 0.2s ease, transform 0.2s ease;
+        border-radius: 10px;
+        position: relative;
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
+        user-select: none;
+    }
+
+    .bottom-nav-item i {
+        font-size: 1.45rem;
+        transition: transform 0.2s ease, color 0.2s ease;
+        line-height: 1;
+    }
+
+    .bottom-nav-item span {
+        line-height: 1;
+        display: block;
+    }
+
+    .bottom-nav-item:active {
+        transform: scale(0.92);
+    }
+
+    .bottom-nav-item.active {
+        color: var(--primary-color);
+    }
+
+    .bottom-nav-item.active i {
+        transform: translateY(-1px);
+    }
+
+    /* Línea activa arriba del ítem */
+    .bottom-nav-item.active::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 20%;
+        right: 20%;
+        height: 3px;
+        background: var(--primary-color);
+        border-radius: 0 0 4px 4px;
+    }
+
+    /* Botón central del menú - flotante elevado */
+    .bottom-nav-item.bottom-nav-more {
+        background: linear-gradient(145deg, #e53935, #ff5252);
+        color: white;
+        width: 54px;
+        height: 54px;
+        min-width: 54px;
+        min-height: 54px;
+        border-radius: 18px;
+        padding: 0;
+        box-shadow:
+            0 6px 20px rgba(211, 47, 47, 0.45),
+            0 2px 6px rgba(0,0,0,0.15);
+        flex: 0 0 auto;
+        margin-bottom: 10px;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .bottom-nav-item.bottom-nav-more i {
+        font-size: 1.5rem;
+        transition: transform 0.3s ease;
+    }
+
+    .bottom-nav-item.bottom-nav-more span {
+        display: none;
+    }
+
+    .bottom-nav-item.bottom-nav-more::before,
+    .bottom-nav-item.bottom-nav-more::after {
+        display: none;
+    }
+
+    .bottom-nav-item.bottom-nav-more:active {
+        transform: scale(0.9);
+        box-shadow: 0 3px 12px rgba(211, 47, 47, 0.4);
+    }
+
+    .bottom-nav-item.bottom-nav-more.active {
+        color: white;
+    }
+
+    .bottom-nav-item.bottom-nav-more.active i {
+        transform: rotate(90deg);
     }
 }

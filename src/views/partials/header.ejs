@@ -102,7 +102,7 @@
                             <% } else { %>
                                 <a href="/auth/login" class="btn-login">
                                     <i class="fas fa-user"></i>
-                                    <span>Acceso Director</span>
+                                    <span>Acceso Admin</span>
                                 </a>
                                 <% } %>
                     </div>
@@ -114,4 +114,31 @@
             </nav>
         </div>
     </header>
+
+    <!-- Overlay para el drawer móvil -->
+    <div class="nav-overlay" id="nav-overlay"></div>
+
+    <!-- Bottom Navigation Bar (solo móvil) -->
+    <nav class="mobile-bottom-nav" aria-label="Navegación principal móvil">
+        <a href="/" id="bn-inicio" class="bottom-nav-item <%= typeof path !== 'undefined' && path === '/' ? 'active' : '' %>">
+            <i class="fas fa-home"></i>
+            <span>Inicio</span>
+        </a>
+        <a href="/noticias" id="bn-noticias" class="bottom-nav-item <%= typeof path !== 'undefined' && path.includes('/noticias') ? 'active' : '' %>">
+            <i class="far fa-newspaper"></i>
+            <span>Noticias</span>
+        </a>
+        <a href="#" id="bn-menu" class="bottom-nav-item bottom-nav-more" aria-label="Menú">
+            <i class="fas fa-bars"></i>
+        </a>
+        <a href="/eventos" id="bn-eventos" class="bottom-nav-item <%= typeof path !== 'undefined' && path.includes('/eventos') ? 'active' : '' %>">
+            <i class="far fa-calendar-alt"></i>
+            <span>Eventos</span>
+        </a>
+        <a href="/contacto" id="bn-contacto" class="bottom-nav-item <%= typeof path !== 'undefined' && path.includes('/contacto') ? 'active' : '' %>">
+            <i class="far fa-envelope"></i>
+            <span>Contacto</span>
+        </a>
+    </nav>
+
     <main>

@@ -8,6 +8,24 @@ const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/AppError');
 const adminService = require('../services/adminService');
 
+/**
+ * Obtiene la URL/ruta de la imagen subida.
+ * En producción (Cloudinary) → req.file.path es la URL pública.
+ * En desarrollo (disco local) → construimos '/uploads/filename'.
+ */
+function getImageUrl(file) {
+    if (!file) return null;
+    // Cloudinary devuelve la URL pública en file.path
+    if (file.path && file.path.startsWith('http')) return file.path;
+    // Disco local
+    return '/uploads/' + file.filename;
+}
+
+function getImageUrlFromFields(files, field) {
+    if (!files || !files[field] || !files[field][0]) return null;
+    return getImageUrl(files[field][0]);
+}
+
 exports.dashboard = catchAsync(async (req, res, next) => {
     const stats = await adminService.getDashboardStats();
     res.render('admin/dashboard', { usuario: req.session.usuario, stats });
@@ -24,9 +42,9 @@ exports.crearNoticia = catchAsync(async (req, res, next) => {
         const noticias = await Noticia.findAll();
         return res.render('admin/noticias', { noticias, error: 'Todos los campos son obligatorios.', success: null });
     }
-    const imagen = req.files['imagen'] ? '/uploads/' + req.files['imagen'][0].filename : null;
-    const imagen2 = req.files['imagen2'] ? '/uploads/' + req.files['imagen2'][0].filename : null;
-    const imagen3 = req.files['imagen3'] ? '/uploads/' + req.files['imagen3'][0].filename : null;
+    const imagen  = getImageUrlFromFields(req.files, 'imagen');
+    const imagen2 = getImageUrlFromFields(req.files, 'imagen2');
+    const imagen3 = getImageUrlFromFields(req.files, 'imagen3');
     await Noticia.create({ titulo: titulo.trim(), contenido: contenido.trim(), imagen, imagen2, imagen3, destacada: !!destacada });
     res.redirect('/panel-director/noticias?success=1&msg=La noticia ha sido publicada con éxito.');
 });
@@ -44,9 +62,12 @@ exports.editarNoticia = catchAsync(async (req, res, next) => {
         return res.render('admin/editar-noticia', { noticia, error: 'El título es obligatorio.' });
     }
     const updateData = { titulo: titulo.trim(), contenido: contenido.trim(), destacada: !!destacada };
-    if (req.files['imagen']) updateData.imagen = '/uploads/' + req.files['imagen'][0].filename;
-    if (req.files['imagen2']) updateData.imagen2 = '/uploads/' + req.files['imagen2'][0].filename;
-    if (req.files['imagen3']) updateData.imagen3 = '/uploads/' + req.files['imagen3'][0].filename;
+    const img  = getImageUrlFromFields(req.files, 'imagen');
+    const img2 = getImageUrlFromFields(req.files, 'imagen2');
+    const img3 = getImageUrlFromFields(req.files, 'imagen3');
+    if (img)  updateData.imagen  = img;
+    if (img2) updateData.imagen2 = img2;
+    if (img3) updateData.imagen3 = img3;
     await Noticia.update(req.params.id, updateData);
     res.redirect('/panel-director/noticias?success=1&msg=La noticia ha sido actualizada.');
 });
@@ -67,9 +88,9 @@ exports.crearEvento = catchAsync(async (req, res, next) => {
         const eventos = await Evento.findAll();
         return res.render('admin/eventos', { eventos, error: 'Título y fecha son obligatorios.' });
     }
-    const imagen = req.files['imagen'] ? '/uploads/' + req.files['imagen'][0].filename : null;
-    const imagen2 = req.files['imagen2'] ? '/uploads/' + req.files['imagen2'][0].filename : null;
-    const imagen3 = req.files['imagen3'] ? '/uploads/' + req.files['imagen3'][0].filename : null;
+    const imagen  = getImageUrlFromFields(req.files, 'imagen');
+    const imagen2 = getImageUrlFromFields(req.files, 'imagen2');
+    const imagen3 = getImageUrlFromFields(req.files, 'imagen3');
     await Evento.create({ titulo: titulo.trim(), descripcion, fecha_evento, hora_evento, lugar, imagen, imagen2, imagen3, destacado: !!destacado });
     res.redirect('/panel-director/eventos?success=1&msg=El evento ha sido creado con éxito.');
 });
@@ -87,9 +108,12 @@ exports.editarEvento = catchAsync(async (req, res, next) => {
         return res.render('admin/editar-evento', { evento, error: 'El título es obligatorio.' });
     }
     const updateData = { titulo: titulo.trim(), descripcion, fecha_evento, hora_evento, lugar, destacado: !!destacado };
-    if (req.files['imagen']) updateData.imagen = '/uploads/' + req.files['imagen'][0].filename;
-    if (req.files['imagen2']) updateData.imagen2 = '/uploads/' + req.files['imagen2'][0].filename;
-    if (req.files['imagen3']) updateData.imagen3 = '/uploads/' + req.files['imagen3'][0].filename;
+    const img  = getImageUrlFromFields(req.files, 'imagen');
+    const img2 = getImageUrlFromFields(req.files, 'imagen2');
+    const img3 = getImageUrlFromFields(req.files, 'imagen3');
+    if (img)  updateData.imagen  = img;
+    if (img2) updateData.imagen2 = img2;
+    if (img3) updateData.imagen3 = img3;
     await Evento.update(req.params.id, updateData);
     res.redirect('/panel-director/eventos?success=1&msg=El evento ha sido actualizado.');
 });
@@ -110,7 +134,7 @@ exports.crearAutoridad = catchAsync(async (req, res, next) => {
         const autoridades = await Autoridad.findAll();
         return res.render('admin/autoridades', { autoridades, error: 'Nombre y cargo son obligatorios.' });
     }
-    const imagen = req.file ? '/uploads/' + req.file.filename : null;
+    const imagen = getImageUrl(req.file);
     await Autoridad.create({ nombre: nombre.trim(), cargo: cargo.trim(), imagen, orden });
     res.redirect('/panel-director/autoridades?success=1&msg=La autoridad ha sido registrada con éxito.');
 });
@@ -127,8 +151,10 @@ exports.editarAutoridad = catchAsync(async (req, res, next) => {
         const autoridad = await Autoridad.findById(req.params.id);
         return res.render('admin/editar-autoridad', { autoridad, error: 'El nombre es obligatorio.' });
     }
-    const imagen = req.file ? '/uploads/' + req.file.filename : null;
-    await Autoridad.update(req.params.id, { nombre: nombre.trim(), cargo: cargo.trim(), imagen, orden });
+    const updateData = { nombre: nombre.trim(), cargo: cargo.trim(), orden };
+    const img = getImageUrl(req.file);
+    if (img) updateData.imagen = img;
+    await Autoridad.update(req.params.id, updateData);
     res.redirect('/panel-director/autoridades?success=1&msg=La autoridad ha sido actualizada.');
 });
 
@@ -144,7 +170,7 @@ exports.listarGaleria = catchAsync(async (req, res, next) => {
 
 exports.subirImagenGaleria = catchAsync(async (req, res, next) => {
     const { titulo } = req.body;
-    const imagen = req.file ? '/uploads/' + req.file.filename : null;
+    const imagen = getImageUrl(req.file);
     if (!imagen) {
         const imagenes = await Galeria.findAll();
         return res.render('admin/galeria', { imagenes, error: 'Debe seleccionar una imagen para subir.' });
@@ -178,7 +204,7 @@ exports.guardarAjustes = catchAsync(async (req, res, next) => {
     if (req.files) {
         const fields = ['hist_img1', 'mv_mision_img', 'mv_vision_img', 'pe_img1'];
         fields.forEach(field => {
-            if (req.files[field]) data[field] = '/uploads/' + req.files[field][0].filename;
+            if (req.files[field]) data[field] = getImageUrl(req.files[field][0]);
         });
     }
     await Ajuste.updateMany(data);

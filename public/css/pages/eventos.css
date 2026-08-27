@@ -1338,14 +1338,18 @@
         align-self: flex-start;
         border-bottom: 2px solid #c0392b;
         border-radius: 0;
+        color: #c0392b; /* FIX: Added explicit color since background is transparent */
+        box-shadow: none; /* FIX: Remove desktop shadow */
     }
 
     .ev-list-date .day {
         font-size: 1.2rem;
+        color: #c0392b; /* Explicit color */
     }
 
     .ev-list-date .month {
         font-size: 0.8rem;
+        color: #c0392b; /* Explicit color instead of white with opacity */
     }
 
     .ev-list-action {

@@ -7,3 +7,8 @@ yarn-error.log*
 .DS_Store
 dist/
 build/
+
+# Imágenes subidas localmente (no subir al repositorio)
+public/uploads/*
+# Mantener la carpeta pero no su contenido
+!public/uploads/.gitkeep
