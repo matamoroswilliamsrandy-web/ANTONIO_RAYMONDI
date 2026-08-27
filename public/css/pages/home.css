@@ -1477,6 +1477,14 @@
 }
 
 @media (max-width: 480px) {
+    .hero-main-title {
+        font-size: clamp(2.5rem, 12vw, 3.2rem);
+    }
+
+    .hero-lead {
+        font-size: 1rem;
+    }
+
     .stats-grid {
         gap: 12px;
     }
