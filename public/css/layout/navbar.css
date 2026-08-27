@@ -241,6 +241,12 @@
         height: 62px;
     }
 
+    #main-header > .container {
+        width: 100%;
+        max-width: none;
+        padding: 0;
+    }
+
     body {
         padding-top: 62px;
         padding-bottom: calc(56px + env(safe-area-inset-bottom, 0px));
@@ -253,7 +259,8 @@
 
     /* Centrar el logo en el header móvil */
     .nav-container {
-        justify-content: center;
+        justify-content: center !important;
+        padding: 0 !important;
     }
 
     .logo {
@@ -283,26 +290,23 @@
         position: fixed;
         top: 0;
         right: -105%;
-        width: 288px;
+        width: min(288px, 86vw);
         height: 100dvh;
-        background:
-            radial-gradient(ellipse 240px 280px at 20% 8%, rgba(211, 47, 47, 0.22) 0%, transparent 65%),
-            radial-gradient(ellipse 200px 230px at 90% 70%, rgba(67, 56, 202, 0.16) 0%, transparent 65%),
-            linear-gradient(155deg, #141929 0%, #0d1117 55%, #130909 100%);
+        background: #ffffff;
         flex-direction: column;
         align-items: flex-start;
         padding: 0;
         gap: 0;
         transition: right 0.42s cubic-bezier(0.4, 0, 0.2, 1);
-        box-shadow: -20px 0 60px rgba(0, 0, 0, 0.45);
+        box-shadow: -20px 0 60px rgba(15, 23, 42, 0.18);
         z-index: 9999;
         overflow-y: auto;
         display: flex;
-        border-left: 1px solid rgba(255, 255, 255, 0.06);
+        border-left: 1px solid rgba(15, 23, 42, 0.08);
     }
 
     .nav-wrapper .nav-links a {
-        color: rgba(255, 255, 255, 0.82);
+        color: #475569;
     }
 
     /* Textura cuadrícula sutil */
@@ -312,8 +316,8 @@
         inset: 0;
         pointer-events: none;
         background-image:
-            linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+            linear-gradient(rgba(15, 23, 42, 0.025) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(15, 23, 42, 0.025) 1px, transparent 1px);
         background-size: 28px 28px;
         z-index: 0;
     }
@@ -349,7 +353,7 @@
         display: flex;
         align-items: center;
         gap: 13px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        border-bottom: 1px solid rgba(15, 23, 42, 0.08);
         position: relative;
         z-index: 1;
         flex-shrink: 0;
@@ -361,7 +365,7 @@
     }
 
     .mobile-menu-header .logo-text {
-        color: white;
+        color: var(--secondary-color);
         font-size: 1.15rem;
     }
 
@@ -392,7 +396,7 @@
         gap: 14px;
         padding: 13px 16px;
         width: 100%;
-        color: rgba(255, 255, 255, 0.62);
+        color: #475569;
         font-size: 0.97rem;
         font-weight: 500;
         text-decoration: none;
@@ -409,14 +413,14 @@
         width: 20px;
         text-align: center;
         font-size: 1.05rem;
-        color: rgba(255, 255, 255, 0.38);
+        color: #94a3b8;
         transition: all 0.28s ease;
         flex-shrink: 0;
     }
 
     .nav-links a:hover {
-        background: rgba(255, 255, 255, 0.07);
-        color: white;
+        background: #f8fafc;
+        color: var(--primary-color);
     }
 
     .nav-links a:hover i {
@@ -425,8 +429,8 @@
     }
 
     .nav-links a.active {
-        background: rgba(211, 47, 47, 0.18);
-        color: #ff6b6b;
+        background: rgba(211, 47, 47, 0.10);
+        color: var(--primary-color);
         font-weight: 700;
     }
 
@@ -452,7 +456,7 @@
     .nav-actions {
         width: 100%;
         display: flex;
-        padding: 8px 12px calc(36px + env(safe-area-inset-bottom, 0px));
+        padding: 8px 12px calc(28px + env(safe-area-inset-bottom, 0px));
         position: relative;
         z-index: 1;
         margin-top: auto;
