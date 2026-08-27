@@ -243,7 +243,7 @@
 
     body {
         padding-top: 62px;
-        padding-bottom: 60px;
+        padding-bottom: calc(56px + env(safe-area-inset-bottom, 0px));
     }
 
     /* Ocultar hamburger - la navegación está en el bottom nav */
@@ -493,9 +493,12 @@
 
     .logo-text {
         font-size: 0.95rem;
-        white-space: normal; /* Allow text to wrap if very small *    /* ---- Bottom Nav Bar ---- */
+        white-space: normal; /* Allow text to wrap if very small */
+    }
+
+    /* ---- Bottom Nav Bar ---- */
     .mobile-bottom-nav {
-        display: flex;
+        display: flex !important;
         position: fixed;
         bottom: 0;
         left: 0;
@@ -509,6 +512,7 @@
         justify-content: space-around;
         padding: 0 2px;
         padding-bottom: env(safe-area-inset-bottom, 0px);
+        box-sizing: content-box;
         transform: translateZ(0);
         -webkit-transform: translateZ(0);
     }
@@ -611,4 +615,4 @@
     .bottom-nav-item.bottom-nav-more.active i {
         transform: rotate(90deg);
     }
-}
+}

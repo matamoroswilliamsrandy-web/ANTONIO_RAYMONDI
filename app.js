@@ -24,7 +24,7 @@ app.use(session({
     resave: true,
     saveUninitialized: false,
     cookie: {
-        secure: config.env === 'production',
+        secure: false, // Temporalmente en false para evitar problemas con el proxy de Railway
         httpOnly: true,
         maxAge: config.session.ttl
     },

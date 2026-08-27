@@ -694,24 +694,16 @@
         font-size: 0.85rem;
     }
 
-    /* Pills en fila — más compactos pero visibles */
     .ev-hero-pills {
-        flex-direction: row;
-        flex-wrap: nowrap;
+        flex-wrap: wrap;
         gap: 6px;
-        overflow-x: auto;
         padding-bottom: 4px;
-        justify-content: flex-start;
+        justify-content: center;
         width: 100%;
-        scrollbar-width: none;
-    }
-
-    .ev-hero-pills::-webkit-scrollbar {
-        display: none;
     }
 
     .ev-pill {
-        flex-shrink: 0;
+        flex: 0 1 auto;
         padding: 8px 14px;
         font-size: 0.78rem;
     }
