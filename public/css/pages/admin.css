@@ -2363,6 +2363,68 @@
     border-top: 1px solid #f1f5f9;
 }
 
+.adm-password-wrap {
+    position: relative;
+}
+
+.adm-password-wrap .adm-input {
+    padding-right: 46px;
+}
+
+.adm-password-toggle {
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    width: 30px;
+    height: 30px;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    color: #94a3b8;
+    cursor: pointer;
+    transform: translateY(-50%);
+}
+
+.adm-password-toggle:hover {
+    background: #f1f5f9;
+    color: var(--adm-red);
+}
+
+.adm-password-rules {
+    display: grid;
+    gap: 5px;
+    margin: 2px 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.adm-password-rules li {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: #94a3b8;
+    font-size: 0.75rem;
+}
+
+.adm-password-rules li i {
+    font-size: 0.62rem;
+}
+
+.adm-password-rules li.is-valid {
+    color: #16a34a;
+    font-weight: 700;
+}
+
+.adm-password-rules li.is-valid i {
+    font-size: 0.8rem;
+}
+
+.adm-btn-submit:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+    box-shadow: none;
+}
+
 /* Shared form blocks */
 .adm-field {
     display: flex;

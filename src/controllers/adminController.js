@@ -46,13 +46,15 @@ exports.listarUsuarios = catchAsync(async (req, res) => {
 exports.crearUsuario = catchAsync(async (req, res) => {
     const username = req.body.username?.trim();
     const password = req.body.password || '';
+    const hasUppercase = /[A-Z]/.test(password);
+    const hasSpecial = /[^A-Za-z0-9]/.test(password);
 
-    if (!username || password.length < 8) {
+    if (!username || password.length < 8 || !hasUppercase || !hasSpecial) {
         const usuarios = await Usuario.findAll();
         return res.render('admin/usuarios', {
             usuarios,
             usuarioActual: req.session.usuario,
-            error: 'El usuario es obligatorio y la contraseña debe tener al menos 8 caracteres.',
+            error: 'La contraseña debe tener al menos 8 caracteres, una mayúscula y un signo.',
             success: null
         });
     }
