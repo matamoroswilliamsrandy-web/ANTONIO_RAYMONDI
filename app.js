@@ -16,6 +16,9 @@ app.use(helmet({ contentSecurityPolicy: false }));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
+// Confía en el proxy de Railway para que funcionen las cookies seguras (secure: true)
+app.set('trust proxy', 1);
+
 app.use(session({
     secret: config.session.secret,
     resave: true,
