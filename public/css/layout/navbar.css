@@ -243,7 +243,7 @@
 
     body {
         padding-top: 62px;
-        padding-bottom: 72px;
+        padding-bottom: 60px;
     }
 
     /* Ocultar hamburger - la navegación está en el bottom nav */
@@ -493,26 +493,23 @@
 
     .logo-text {
         font-size: 0.95rem;
-        white-space: normal; /* Allow text to wrap if very small */
-    }
-
-    /* ---- Bottom Nav Bar ---- */
+        white-space: normal; /* Allow text to wrap if very small *    /* ---- Bottom Nav Bar ---- */
     .mobile-bottom-nav {
         display: flex;
         position: fixed;
         bottom: 0;
         left: 0;
         right: 0;
-        height: 64px;
+        height: 56px;
         background: #ffffff;
-        border-top: 1px solid rgba(0, 0, 0, 0.06);
-        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.12);
-        z-index: 9999; /* Ensure it stays above everything */
+        border-top: 1px solid rgba(0, 0, 0, 0.08);
+        box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.10);
+        z-index: 9999;
         align-items: center;
-        justify-content: space-between;
-        padding: 0 4px;
+        justify-content: space-around;
+        padding: 0 2px;
         padding-bottom: env(safe-area-inset-bottom, 0px);
-        transform: translateZ(0); /* Hardware acceleration to prevent jumping */
+        transform: translateZ(0);
         -webkit-transform: translateZ(0);
     }
 
@@ -521,16 +518,17 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        gap: 3px;
+        gap: 2px;
         flex: 1 1 0;
-        height: 100%; /* Take full height of container */
+        height: 100%;
         text-decoration: none;
-        color: #999999;
-        font-size: 0.6rem;
+        color: #aaa;
+        font-size: 0.55rem;
         font-weight: 600;
         font-family: 'Poppins', sans-serif;
         text-transform: uppercase;
-        transition: color 0.2s ease, transform 0.2s ease;
+        letter-spacing: 0.02em;
+        transition: color 0.2s ease;
         position: relative;
         cursor: pointer;
         -webkit-tap-highlight-color: transparent;
@@ -538,8 +536,7 @@
     }
 
     .bottom-nav-item i {
-        font-size: 1.35rem;
-        transition: transform 0.2s ease, color 0.2s ease;
+        font-size: 1.15rem;
         line-height: 1;
     }
 
@@ -547,10 +544,6 @@
         line-height: 1;
         display: block;
         white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        max-width: 100%;
-        margin-top: 2px;
     }
 
     .bottom-nav-item:active {
@@ -562,7 +555,7 @@
     }
 
     .bottom-nav-item.active i {
-        transform: translateY(-2px);
+        transform: translateY(-1px);
     }
 
     /* Línea activa arriba del ítem */
@@ -572,29 +565,29 @@
         top: 0;
         left: 25%;
         right: 25%;
-        height: 3px;
+        height: 2.5px;
         background: var(--primary-color);
-        border-radius: 0 0 4px 4px;
+        border-radius: 0 0 3px 3px;
     }
 
-    /* Botón central del menú - flotante elevado */
+    /* Botón central del menú */
     .bottom-nav-item.bottom-nav-more {
         background: linear-gradient(135deg, var(--primary-color), #ff4757);
         color: white;
-        width: 50px;
-        height: 50px;
-        max-width: 50px;
-        flex: 0 0 50px;
-        min-height: 50px; /* Force exact height */
-        border-radius: 50%; /* Make it a circle */
+        width: 44px;
+        height: 44px;
+        max-width: 44px;
+        min-height: 44px;
+        flex: 0 0 44px;
+        border-radius: 50%;
         padding: 0;
-        box-shadow: 0 4px 12px rgba(211, 47, 47, 0.4);
-        margin-bottom: 25px; /* Float it up */
+        box-shadow: 0 3px 10px rgba(211, 47, 47, 0.35);
+        margin-bottom: 18px;
         transform: translateZ(0);
     }
 
     .bottom-nav-item.bottom-nav-more i {
-        font-size: 1.4rem;
+        font-size: 1.2rem;
         margin: 0;
     }
 
