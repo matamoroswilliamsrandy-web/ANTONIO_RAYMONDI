@@ -23,7 +23,7 @@
     <meta property="og:description"
         content="<%= typeof description !== 'undefined' ? description : 'Institución educativa comprometida con la excelencia académica y la formación de valores.' %>">
     <meta property="og:image"
-        content="<%= typeof ogImage !== 'undefined' ? (ogImage.startsWith('http') ? ogImage : (baseUrl + ogImage)) : (baseUrl + '/img/logo.png') %>">
+        content="<%= (typeof ogImage !== 'undefined' && ogImage) ? (ogImage.startsWith('http') ? ogImage : (baseUrl + ogImage)) : (baseUrl + '/img/logo.png') %>">
 
     <!-- WhatsApp / Mobile Sharing Description -->
     <meta name="description"
