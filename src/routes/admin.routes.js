@@ -10,6 +10,11 @@ router.use(authMiddleware);
 // Dashboard
 router.get('/', adminController.dashboard);
 
+// Usuarios administradores
+router.get('/usuarios', adminController.listarUsuarios);
+router.post('/usuarios/crear', adminController.crearUsuario);
+router.post('/usuarios/eliminar/:id', adminController.eliminarUsuario);
+
 // ── Noticias ──────────────────────────────────
 router.get('/noticias', adminController.listarNoticias);
 router.post('/noticias/crear', upload.fields([

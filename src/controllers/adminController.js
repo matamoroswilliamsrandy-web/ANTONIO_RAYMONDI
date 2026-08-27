@@ -1,3 +1,4 @@
+const bcrypt = require('bcrypt');
 const Noticia = require('../models/Noticia');
 const Evento = require('../models/Evento');
 const Autoridad = require('../models/Autoridad');
@@ -7,6 +8,7 @@ const Ajuste = require('../models/Ajuste');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/AppError');
 const adminService = require('../services/adminService');
+const Usuario = require('../models/Usuario');
 
 /**
  * Obtiene la URL/ruta de la imagen subida.
@@ -29,6 +31,54 @@ function getImageUrlFromFields(files, field) {
 exports.dashboard = catchAsync(async (req, res, next) => {
     const stats = await adminService.getDashboardStats();
     res.render('admin/dashboard', { usuario: req.session.usuario, stats });
+});
+
+exports.listarUsuarios = catchAsync(async (req, res) => {
+    const usuarios = await Usuario.findAll();
+    res.render('admin/usuarios', {
+        usuarios,
+        usuarioActual: req.session.usuario,
+        error: req.query.error || null,
+        success: req.query.success === '1' ? 'Usuario creado correctamente.' : req.query.success || null
+    });
+});
+
+exports.crearUsuario = catchAsync(async (req, res) => {
+    const username = req.body.username?.trim();
+    const password = req.body.password || '';
+
+    if (!username || password.length < 8) {
+        const usuarios = await Usuario.findAll();
+        return res.render('admin/usuarios', {
+            usuarios,
+            usuarioActual: req.session.usuario,
+            error: 'El usuario es obligatorio y la contraseña debe tener al menos 8 caracteres.',
+            success: null
+        });
+    }
+
+    if (await Usuario.findByUsername(username)) {
+        const usuarios = await Usuario.findAll();
+        return res.render('admin/usuarios', {
+            usuarios,
+            usuarioActual: req.session.usuario,
+            error: 'Ese nombre de usuario ya existe.',
+            success: null
+        });
+    }
+
+    const passwordHash = await bcrypt.hash(password, 12);
+    await Usuario.create(username, passwordHash);
+    res.redirect('/panel-director/usuarios?success=1');
+});
+
+exports.eliminarUsuario = catchAsync(async (req, res) => {
+    if (String(req.session.usuario.id) === String(req.params.id)) {
+        return res.redirect('/panel-director/usuarios?error=No puedes eliminar el usuario con el que has iniciado sesión.');
+    }
+
+    await Usuario.delete(req.params.id);
+    res.redirect('/panel-director/usuarios?success=Usuario eliminado correctamente.');
 });
 
 exports.listarNoticias = catchAsync(async (req, res, next) => {

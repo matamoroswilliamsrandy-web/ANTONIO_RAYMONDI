@@ -375,7 +375,7 @@
     }
 
     .mobile-menu-header .logo-text span {
-        color: #ff8a80;
+        color: var(--primary-color);
     }
 
     /* ---- Nav links en el drawer ---- */

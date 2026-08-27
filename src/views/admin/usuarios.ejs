@@ -1,0 +1,87 @@
+<%- include('../partials/admin-header', { path: '/panel-director/usuarios' }) %>
+
+<div class="adm-page-header">
+    <div class="adm-page-header-left">
+        <div class="adm-page-icon adm-page-icon--red">
+            <i class="fas fa-user-cog"></i>
+        </div>
+        <div>
+            <h1 class="adm-page-title">Usuarios Admin</h1>
+            <p class="adm-page-sub">Administra las cuentas que pueden acceder al panel.</p>
+        </div>
+    </div>
+    <div class="adm-page-header-actions">
+        <a href="/" target="_blank" class="adm-header-link">
+            <i class="fas fa-globe"></i> <span>Ver Sitio</span>
+        </a>
+    </div>
+</div>
+
+<% if (error) { %>
+    <div class="adm-alert adm-alert--error"><i class="fas fa-exclamation-circle"></i> <%= error %></div>
+<% } %>
+<% if (success) { %>
+    <div class="adm-alert adm-alert--success"><i class="fas fa-check-circle"></i> <%= success %></div>
+<% } %>
+
+<div class="adm-users-layout">
+    <section class="admin-form">
+        <h2 class="adm-section-title"><i class="fas fa-user-plus"></i> Crear usuario</h2>
+        <p class="adm-form-help">La contraseña debe tener como mínimo 8 caracteres.</p>
+        <form action="/panel-director/usuarios/crear" method="POST">
+            <label for="username">Nombre de usuario</label>
+            <input id="username" name="username" type="text" class="form-control" minlength="3" maxlength="80"
+                autocomplete="username" required>
+
+            <label for="password">Contraseña segura</label>
+            <input id="password" name="password" type="password" class="form-control" minlength="8"
+                autocomplete="new-password" required>
+
+            <button type="submit" class="adm-primary-btn">
+                <i class="fas fa-user-plus"></i> Crear usuario
+            </button>
+        </form>
+    </section>
+
+    <section class="adm-table-panel">
+        <div class="adm-table-panel-header">
+            <h3><i class="fas fa-users"></i> Usuarios registrados</h3>
+            <span class="adm-count-badge"><%= usuarios.length %></span>
+        </div>
+        <% if (usuarios.length === 0) { %>
+            <div class="adm-empty-state">
+                <div class="adm-empty-icon"><i class="fas fa-users"></i></div>
+                <p>No hay usuarios registrados.</p>
+            </div>
+        <% } else { %>
+            <div class="adm-tbl-wrap">
+                <table class="adm-tbl">
+                    <thead>
+                        <tr><th>Usuario</th><th style="width:110px; text-align:center">Acción</th></tr>
+                    </thead>
+                    <tbody>
+                        <% usuarios.forEach(usuario => { %>
+                            <tr class="adm-tbl-row">
+                                <td><span class="adm-tbl-title"><i class="fas fa-user-shield"></i> <%= usuario.username %></span></td>
+                                <td style="text-align:center">
+                                    <% if (String(usuario.id) !== String(typeof usuarioActual !== 'undefined' ? usuarioActual.id : '')) { %>
+                                        <form action="/panel-director/usuarios/eliminar/<%= usuario.id %>" method="POST"
+                                            onsubmit="return confirm('¿Eliminar este usuario?');">
+                                            <button type="submit" class="adm-action-btn adm-action-btn--delete" title="Eliminar">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    <% } else { %>
+                                        <span class="adm-meta-item">Sesión actual</span>
+                                    <% } %>
+                                </td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        <% } %>
+    </section>
+</div>
+
+<%- include('../partials/admin-footer') %>

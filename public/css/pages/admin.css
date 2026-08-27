@@ -105,7 +105,7 @@
 }
 
 .sidebar-header h3 {
-    color: var(--adm-dark);
+    color: var(--adm-red);
     font-size: 0.85rem;
     font-weight: 800;
     margin: 0;
@@ -955,6 +955,84 @@
     box-shadow: 0 0 0 4px rgba(192, 57, 43, 0.1);
 }
 
+.adm-users-layout {
+    display: grid;
+    grid-template-columns: minmax(280px, 360px) minmax(0, 1fr);
+    gap: 24px;
+    align-items: start;
+}
+
+.adm-users-layout label {
+    display: block;
+    margin: 18px 0 7px;
+    color: #475569;
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+.adm-users-layout form label:first-child {
+    margin-top: 0;
+}
+
+.adm-form-help {
+    color: #64748b;
+    font-size: 0.85rem;
+    margin: -8px 0 22px;
+}
+
+.adm-primary-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    margin-top: 24px;
+    padding: 13px 18px;
+    border: 0;
+    border-radius: 10px;
+    background: var(--adm-red);
+    color: white;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.adm-primary-btn:hover {
+    background: var(--adm-red-dk);
+}
+
+.adm-section-title {
+    margin: 0 0 18px;
+    color: var(--adm-dark);
+    font-size: 1.15rem;
+}
+
+.adm-section-title i {
+    margin-right: 8px;
+    color: var(--adm-red);
+}
+
+.adm-alert {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 13px 16px;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.adm-alert--error {
+    background: #fef2f2;
+    color: #b91c1c;
+}
+
+.adm-alert--success {
+    background: #ecfdf5;
+    color: #047857;
+}
+
 /* ══════════════════════════════════════════════════
    ACTION BUTTONS
 ══════════════════════════════════════════════════ */
@@ -1051,6 +1129,10 @@
 }
 
 @media (max-width: 768px) {
+    .adm-users-layout {
+        grid-template-columns: 1fr;
+    }
+
     .sidebar {
         transform: translateX(-100%);
     }
