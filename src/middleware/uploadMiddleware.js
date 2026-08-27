@@ -1,11 +1,15 @@
 const multer = require('multer');
 const path = require('path');
 
-const IS_PRODUCTION = process.env.NODE_ENV === 'production';
+const USE_CLOUDINARY = Boolean(
+    process.env.CLOUDINARY_CLOUD_NAME &&
+    process.env.CLOUDINARY_API_KEY &&
+    process.env.CLOUDINARY_API_SECRET
+);
 
 let upload;
 
-if (IS_PRODUCTION) {
+if (USE_CLOUDINARY) {
     // ── PRODUCCIÓN (Railway): guardar en Cloudinary ──────────────────────────
     const cloudinary = require('../config/cloudinary');
     const { CloudinaryStorage } = require('multer-storage-cloudinary');
