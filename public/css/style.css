@@ -5,21 +5,21 @@
 @import url('./base/base.css');
 
 /* 2. Layout */
-@import url('./layout/navbar.css');
-@import url('./layout/footer.css');
+@import url('./layout/navbar.css?v=3');
+@import url('./layout/footer.css?v=3');
 
 /* 3. Components */
-@import url('./components/buttons.css');
-@import url('./components/cards.css');
+@import url('./components/buttons.css?v=3');
+@import url('./components/cards.css?v=3');
 
 /* 4. Pages */
-@import url('./pages/home.css');
-@import url('./pages/admin.css');
-@import url('./pages/noticias.css');
-@import url('./pages/eventos.css');
-@import url('./pages/autoridades.css');
-@import url('./pages/galeria.css');
-@import url('./pages/contacto.css');
+@import url('./pages/home.css?v=3');
+@import url('./pages/admin.css?v=3');
+@import url('./pages/noticias.css?v=3');
+@import url('./pages/eventos.css?v=3');
+@import url('./pages/autoridades.css?v=3');
+@import url('./pages/galeria.css?v=3');
+@import url('./pages/contacto.css?v=3');
 
 /* NOTE: Footer styles are in layout/footer.css */
 /* NOTE: bg-pattern is defined in home.css */
